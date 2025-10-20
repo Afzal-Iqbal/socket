@@ -73,9 +73,14 @@ io.on('connection',(socket) => {
         }
         addMessage(obj);
 
-        // socket.broadcast('messagetoalluser', (data)=>{
-        //     const message
-        // })
+        socket.broadcast('messagetoalluser', (data)=>{
+            const message = {
+                ...data,
+                userName: userName,
+                socketId: socket.id
+            }
+            socket.broadcast.emit('messagetoalluser', message);
+        })
     })
     
 });
